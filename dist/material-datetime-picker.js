@@ -31,11 +31,13 @@
     /**
      * @typedef {{
      *     clickOutsideToClose : boolean,
+     *     closeTo             : Element|string,
      *     fullscreen          : boolean,
      *     dateFilter          : function(Date):boolean,
      *     dateTitle           : string,
      *     maxDate             : Date,
      *     minDate             : Date,
+     *     openFrom            : Element|string,
      *     parent              : Element|string,
      *     targetEvent         : Event,
      *     template            : string,
@@ -195,6 +197,8 @@
             template.push(templates.close);
 
             return $mdDialog.show({
+                openFrom            : options.openFrom,
+                closeTo             : options.closeTo,
                 controller          : DateTimePickerController,
                 controllerAs        : 'dateTimePicker',
                 template            : template.join(''),
