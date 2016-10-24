@@ -262,7 +262,7 @@
          * Initial date from the Options object
          * @type {Date}
          */
-        dateTimePicker.date = resolvedOptions.date || null;
+        dateTimePicker.date = resolvedOptions.date ? new Date(JSON.stringify(resolvedOptions.date)) : null;
 
         /**
          * @see https://material.angularjs.org/latest/api/directive/mdCalendar
