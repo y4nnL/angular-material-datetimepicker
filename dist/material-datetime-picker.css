@@ -1,0 +1,80 @@
+/***********************************************************************************************************************
+ ** Component : md-datetime-picker */
+
+.md-datetime-picker-time-box {
+    position   : relative;
+    font-size  : 48px;
+    width      : 50px;
+    height     : 100px;
+    text-align : center;
+    margin-top : 30px;
+}
+
+.md-datetime-picker-time-box-sep {
+    padding-left  : 0;
+    padding-right : 0;
+    color         : lightgray;
+}
+
+.md-datetime-picker-time-up,
+.md-datetime-picker-time-down {
+    position    : absolute;
+    left        : 10px;
+    padding     : 0 !important;
+    margin      : 0 !important;
+    width       : 64px !important;
+    height      : 64px !important;
+    line-height : 48px !important;
+    z-index     : 2;
+}
+
+.md-datetime-picker-time-up {
+    top : -50px;
+}
+
+.md-datetime-picker-time-down {
+    bottom : -10px;
+}
+
+.md-datetime-picker-time-up md-icon,
+.md-datetime-picker-time-down md-icon {
+    font-size : 48px !important;
+    width     : 48px !important;
+    height    : 48px !important;
+}
+
+.md-datetime-picker-time {
+    position : absolute;
+    top      : 0;
+    left     : 29px;
+    z-index  : 1;
+}
+
+.md-datetime-picker-time-two-digits {
+    left : 16px;
+}
+
+/***********************************************************************************************************************
+ ** Animations */
+
+.md-datetime-picker-time.ng-hide-add,
+.md-datetime-picker-time.ng-hide-remove {
+    display    : block;
+    transition : opacity .15s linear;
+}
+
+.md-datetime-picker-time.ng-hide-add {
+    opacity : 1;
+}
+
+.md-datetime-picker-time.ng-hide-add-active {
+    opacity : 0;
+}
+
+.md-datetime-picker-time.ng-hide-remove {
+    opacity : 0;
+}
+
+.md-datetime-picker-time.ng-hide-remove-active {
+    opacity : 1;
+}

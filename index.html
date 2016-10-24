@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="materialDateTimePicker">
+    <head>
+        <meta charset="utf-8">
+        <!--
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Vendors CSS
+        -->
+        <link rel="stylesheet" href="vendors/angular-material/angular-material.css">
+        <link rel="stylesheet" href="vendors/material-design-icons/iconfont/material-icons.css">
+        <link rel="stylesheet" href="dist/material-datetime-picker.css">
+        <!--
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Components CSS
+        -->
+        <link rel="stylesheet" href="components/materialDateTimePicker/materialDateTimePicker.css">
+    </head>
+    <body ng-controller="MaterialDateTimePicker">
+        <div class="materialDateTimePicker">
+            <div layout layout-align="center">
+                <div md-ink-ripple ng-click="pickDate($event)" class="md-primary md-button md-raised">DATE</div>
+                <div md-ink-ripple ng-click="pickTime($event)" class="md-primary md-button md-raised">TIME</div>
+                <div md-ink-ripple ng-click="pickDateTime($event)" class="md-primary md-button md-raised">DATE &amp; TIME</div>
+            </div>
+            <div>date={{date|date:'EEEE dd MMMM yyyy'}}</div>
+            <div>time={{date|date:'HH:mm'}}</div>
+        </div>
+        <!--
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Vendors JS
+        -->
+        <script src="vendors/angular/angular.js"></script>
+        <script src="vendors/angular-animate/angular-animate.js"></script>
+        <script src="vendors/angular-aria/angular-aria.js"></script>
+        <script src="vendors/angular-i18n/angular-locale_fr-fr.js"></script>
+        <script src="vendors/angular-material/angular-material.js"></script>
+        <script src="vendors/angular-messages/angular-messages.js"></script>
+        <script src="vendors/lodash/lodash.js"></script>
+        <script src="vendors/moment/moment.js"></script>
+        <!--
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Components JS
+        -->
+        <script src="components/materialDateTimePicker/materialDateTimePicker.js"></script>
+        <script src="dist/material-datetime-picker.js"></script>
+    </body>
+</html>

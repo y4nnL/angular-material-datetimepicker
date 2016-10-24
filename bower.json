@@ -1,0 +1,26 @@
+{
+    "name" : "idapps-angular-material-datetime-picker",
+    "version" : "1.0.0",
+    "authors" : [
+        "Yann Lojewski <yann.lojewski@id-apps.fr>"
+    ],
+    "description" : "",
+    "main" : "dist/material-datetime-picker.js",
+    "moduleType" : [
+        "es6",
+        "globals"
+    ],
+    "license" : "MIT",
+    "homepage" : "https://gitlab.id-apps.info/interne-idapps-angular/toast-cancel",
+    "private" : true,
+    "dependencies" : {
+        "angular" : ">=1.4.8",
+        "angular-material" : "^1.1.1",
+        "material-design-icons" : "git@gitlab.id-apps.info:interne-idapps-angular/material-design-icons-font.git#1.0",
+        "angular-i18n" : "^1.5.8",
+        "lodash" : "^4.16.4"
+    },
+    "devDependencies" : {
+        "moment" : "^2.15.1"
+    }
+}
