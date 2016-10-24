@@ -73,8 +73,7 @@
         '<div layout="row"' +
         '     layout-align="center none">' +
         '    <div layout>' +
-        '        <div class="md-datetime-picker-time-box"' +
-        '             flex>' +
+        '        <div class="md-datetime-picker-time-box">' +
         '            <md-button class="md-datetime-picker-time-up md-icon-button md-primary"' +
         '                    ng-click="dateTimePicker.hoursUp()">' +
         '                <md-icon md-font-set="mdDateTimePicker">keyboard_arrow_up</md-icon>' +
@@ -90,12 +89,10 @@
         '                <md-icon md-font-set="mdDateTimePicker">keyboard_arrow_down</md-icon>' +
         '            </md-button>' +
         '        </div>' +
-        '        <div class="md-datetime-picker-time-box md-datetime-picker-time-box-sep"' +
-        '             flex>' +
+        '        <div class="md-datetime-picker-time-box md-datetime-picker-time-box-sep">' +
         '            <span class="md-datetime-picker-time">{{dateTimePicker.i18n.timeSeparator}}</span>' +
         '        </div>' +
-        '        <div class="md-datetime-picker-time-box"' +
-        '             flex>' +
+        '        <div class="md-datetime-picker-time-box">' +
         '            <md-button class="md-datetime-picker-time-up md-icon-button md-primary"' +
         '                    ng-click="dateTimePicker.minutesUp()">' +
         '                <md-icon md-font-set="mdDateTimePicker">keyboard_arrow_up</md-icon>' +
