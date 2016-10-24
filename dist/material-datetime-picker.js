@@ -90,7 +90,8 @@
         '                <md-icon md-font-set="mdDateTimePicker">keyboard_arrow_down</md-icon>' +
         '            </md-button>' +
         '        </div>' +
-        '        <div class="md-datetime-picker-time-box md-datetime-picker-time-box-sep">' +
+        '        <div class="md-datetime-picker-time-box md-datetime-picker-time-box-sep"' +
+        '             flex>' +
         '            <span class="md-datetime-picker-time">{{dateTimePicker.i18n.timeSeparator}}</span>' +
         '        </div>' +
         '        <div class="md-datetime-picker-time-box"' +
