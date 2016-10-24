@@ -79,10 +79,9 @@
         '                <md-icon md-font-set="mdDateTimePicker">keyboard_arrow_up</md-icon>' +
         '            </md-button>' +
         '            <span class="md-datetime-picker-time"' +
-        '                  ng-class="{ \'md-datetime-picker-time-two-digits\' : hour > 9 }"' +
         '                  ng-repeat="hour in dateTimePicker.arrays.hours track by $index"' +
         '                  ng-show="hour == dateTimePicker.hours">' +
-        '                {{hour}}' +
+        '                <span ng-show="hour < 10">0</span>{{hour}}' +
         '            </span>' +
         '            <md-button class="md-datetime-picker-time-down md-icon-button md-primary"' +
         '                    ng-click="dateTimePicker.hoursDown()">' +
@@ -101,7 +100,7 @@
         '                  ng-class="{ \'md-datetime-picker-time-two-digits\' : minute > 9 }"' +
         '                  ng-repeat="minute in dateTimePicker.arrays.minutes track by $index"' +
         '                  ng-show="minute == dateTimePicker.minutes">' +
-        '                {{minute}}' +
+        '                <span ng-show="minute < 10">0</span>{{minute}}' +
         '            </span>' +
         '            <md-button class="md-datetime-picker-time-down md-icon-button md-primary"' +
         '                    ng-click="dateTimePicker.minutesDown()">' +

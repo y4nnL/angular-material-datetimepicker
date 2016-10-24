@@ -46,12 +46,12 @@
 .md-datetime-picker-time {
     position : absolute;
     top      : 0;
-    left     : 29px;
+    left     : 16px;
     z-index  : 1;
 }
 
-.md-datetime-picker-time-two-digits {
-    left : 16px;
+.md-datetime-picker-time-box-sep .md-datetime-picker-time {
+    left : 30px;
 }
 
 /***********************************************************************************************************************
