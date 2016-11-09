@@ -32,9 +32,10 @@
      * @typedef {{
      *     clickOutsideToClose : boolean,
      *     closeTo             : Element|string,
-     *     fullscreen          : boolean,
      *     dateFilter          : function(Date):boolean,
      *     dateTitle           : string,
+     *     fullscreen          : boolean,
+     *     hasBackdrop           boolean,
      *     maxDate             : Date,
      *     minDate             : Date,
      *     openFrom            : Element|string,
@@ -205,6 +206,7 @@
                 parent              : angular.element(options.parent || document.body),
                 fullscreen          : !!options.fullscreen,
                 clickOutsideToClose : 'clickOutsideToClose' in options ? options.clickOutsideToClose : true,
+                hasBackdrop         : 'hasBackdrop' in options ? options.hasBackdrop : true,
                 resolve             : {
                     resolvedOptions : resolveOptions
                 }
