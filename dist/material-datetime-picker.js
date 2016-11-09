@@ -204,7 +204,7 @@
                 targetEvent         : options.targetEvent,
                 parent              : angular.element(options.parent || document.body),
                 fullscreen          : !!options.fullscreen,
-                clickOutsideToClose : options.clickOutsideToClose || true,
+                clickOutsideToClose : 'clickOutsideToClose' in options ? options.clickOutsideToClose : true,
                 resolve             : {
                     resolvedOptions : resolveOptions
                 }
