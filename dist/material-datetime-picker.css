@@ -53,28 +53,3 @@
 .md-datetime-picker-time-box-sep .md-datetime-picker-time {
     left : 30px;
 }
-
-/***********************************************************************************************************************
- ** Animations */
-
-.md-datetime-picker-time.ng-hide-add,
-.md-datetime-picker-time.ng-hide-remove {
-    display    : block;
-    transition : opacity .15s linear;
-}
-
-.md-datetime-picker-time.ng-hide-add {
-    opacity : 1;
-}
-
-.md-datetime-picker-time.ng-hide-add-active {
-    opacity : 0;
-}
-
-.md-datetime-picker-time.ng-hide-remove {
-    opacity : 0;
-}
-
-.md-datetime-picker-time.ng-hide-remove-active {
-    opacity : 1;
-}
