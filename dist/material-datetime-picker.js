@@ -172,13 +172,16 @@
         '    <md-dialog-actions layout="row">' +
         '        <span flex></span>' +
         '        <md-button ng-click="dateTimePicker.cancel()">{{dateTimePicker.i18n.cancel}}</md-button>' +
-        '        <md-button ng-if="!dateTimePicker.tabs"' +
+        '        <md-button class="md-primary"' +
+        '                   ng-if="!dateTimePicker.tabs"' +
         '                   ng-click="dateTimePicker.previous()"' +
         '                   ng-disabled="dateTimePicker.isDateTab()">{{dateTimePicker.i18n.previous}}</md-button>' +
-        '        <md-button ng-if="!dateTimePicker.tabs"' +
+        '        <md-button class="md-primary"' +
+        '                   ng-if="!dateTimePicker.tabs"' +
         '                   ng-click="dateTimePicker.next()"' +
         '                   ng-disabled="dateTimePicker.isTimeTab()">{{dateTimePicker.i18n.next}}</md-button>' +
-        '        <md-button ng-click="dateTimePicker.hide()"' +
+        '        <md-button class="md-primary"' +
+        '                   ng-click="dateTimePicker.hide()"' +
         '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
         '    </md-dialog-actions>' +
         '</md-dialog>';
