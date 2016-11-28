@@ -59,9 +59,14 @@ function MaterialDateTimePicker($scope, $mdDateTimePicker) {
 
     $scope.pickDateTime = function ($event) {
         $mdDateTimePicker({
+            cancel        : 'kènesôl',
             date          : $scope.date,
+            hide          : 'Validèïte',
             maxDate       : moment().add('5', 'days').toDate(),
             minDate       : moment().subtract('5', 'days').toDate(),
+            next          : 'Naixte',
+            previous      : 'Préviousse',
+            tabs          : false,
             targetEvent   : $event,
             template      : 'datetime',
             timeStep      : 15,

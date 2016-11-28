@@ -30,22 +30,25 @@
 
     /**
      * @typedef {{
-     *     clickOutsideToClose : boolean,
-     *     closeTo             : Element|string,
-     *     dateFilter          : function(Date):boolean,
-     *     dateTitle           : string,
-     *     fullscreen          : boolean,
-     *     hasBackdrop           boolean,
-     *     maxDate             : Date,
-     *     minDate             : Date,
-     *     openFrom            : Element|string,
-     *     parent              : Element|string,
-     *     skipHide            : boolean,
-     *     targetEvent         : Event,
-     *     template            : string,
-     *     title               : string,
-     *     timeStep            : number,
-     *     timeTitle           : string,
+     *     clickOutsideToClose : boolean
+     *     closeTo             : Element|string
+     *     dateFilter          : function(Date):boolean
+     *     dateTitle           : string
+     *     fullscreen          : boolean
+     *     hasBackdrop           boolean
+     *     maxDate             : Date
+     *     minDate             : Date
+     *     next                : string
+     *     openFrom            : Element|string
+     *     parent              : Element|string
+     *     previous            : string
+     *     skipHide            : boolean
+     *     tabs                : boolean
+     *     targetEvent         : Event
+     *     template            : string
+     *     title               : string
+     *     timeStep            : number
+     *     timeTitle           : string
      *     toolbar             : boolean
      * }}
      */
@@ -118,6 +121,10 @@
     templates.open =
         '<md-dialog aria-label="Date"' +
         '           class="md-datetime-picker {{dateTimePicker.class}}">' +
+        '    <style ng-if="!dateTimePicker.tabs">' +
+        '        .md-datetime-picker [role="tablist"] { display : none; }' +
+        '        .md-datetime-picker md-tabs-content-wrapper { top : 0; }' +
+        '    </style>' +
         '    <md-toolbar ng-show="dateTimePicker.toolbar && dateTimePicker.i18n.title">' +
         '        <div class="md-toolbar-tools">' +
         '            <h2>{{dateTimePicker.i18n.title}}</h2>' +
@@ -165,6 +172,12 @@
         '    <md-dialog-actions layout="row">' +
         '        <span flex></span>' +
         '        <md-button ng-click="dateTimePicker.cancel()">{{dateTimePicker.i18n.cancel}}</md-button>' +
+        '        <md-button ng-if="!dateTimePicker.tabs"' +
+        '                   ng-click="dateTimePicker.previous()"' +
+        '                   ng-disabled="dateTimePicker.isDateTab()">{{dateTimePicker.i18n.previous}}</md-button>' +
+        '        <md-button ng-if="!dateTimePicker.tabs"' +
+        '                   ng-click="dateTimePicker.next()"' +
+        '                   ng-disabled="dateTimePicker.isTimeTab()">{{dateTimePicker.i18n.next}}</md-button>' +
         '        <md-button ng-click="dateTimePicker.hide()"' +
         '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
         '    </md-dialog-actions>' +
@@ -283,18 +296,22 @@
          * Internal i18n use
          * @see Options
          * @type {{
-         *     cancel        : (string),
-         *     dateTitle     : (string),
-         *     hide          : (string),
-         *     title         : (string),
-         *     timeSeparator : (string),
-         *     timeTitle     : (string)
+         *     cancel        : string
+         *     dateTitle     : string
+         *     hide          : string
+         *     next          : string
+         *     previous      : string
+         *     title         : string
+         *     timeSeparator : string
+         *     timeTitle     : string
          * }}
          */
         dateTimePicker.i18n = {
             cancel        : resolvedOptions.cancel || 'Cancel',
             dateTitle     : resolvedOptions.dateTitle || resolvedOptions.title,
             hide          : resolvedOptions.hide || 'Validate',
+            next          : resolvedOptions.next || 'Next',
+            previous      : resolvedOptions.previous || 'Previous',
             title         : resolvedOptions.title,
             timeSeparator : resolvedOptions.timeSeparator || ':',
             timeTitle     : resolvedOptions.timeTitle || resolvedOptions.title
@@ -325,6 +342,12 @@
          * @type {number}
          */
         dateTimePicker.selectedTab = 0;
+
+        /**
+         * Whether show the modal tabs ui
+         * @type {boolean}
+         */
+        dateTimePicker.tabs = 'tabs' in resolvedOptions ? !!resolvedOptions.tabs : true;
 
         /**
          * Minutes are [in,de]cremented through this step
@@ -397,6 +420,22 @@
         };
 
         /**
+         * Whether the date tab is selected
+         * @returns {boolean}
+         */
+        dateTimePicker.isDateTab = function () {
+            return dateTimePicker.selectedTab === 0;
+        };
+
+        /**
+         * Whether the time tab is selected
+         * @returns {boolean}
+         */
+        dateTimePicker.isTimeTab = function () {
+            return dateTimePicker.selectedTab === 1;
+        };
+
+        /**
          * Increment the minutes
          */
         dateTimePicker.minutesUp = function () {
@@ -428,6 +467,20 @@
             } else {
                 dateTimePicker.date.setMinutes(dateTimePicker.minutes = minutes);
             }
+        };
+
+        /**
+         * Go to the next tab
+         */
+        dateTimePicker.next = function () {
+            dateTimePicker.selectedTab += 1;
+        };
+
+        /**
+         * Go to the previous tab
+         */
+        dateTimePicker.previous = function () {
+            dateTimePicker.selectedTab -= 1;
         };
     }
 
