@@ -44,6 +44,8 @@ function MaterialDateTimePicker($scope, $mdDateTimePicker) {
 
     $scope.pickTime = function ($event) {
         $mdDateTimePicker({
+            buttonAlign   : 'center',
+            buttonClass   : 'yoooo',
             date          : $scope.date,
             targetEvent   : $event,
             template      : 'time',
