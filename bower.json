@@ -1,6 +1,6 @@
 {
     "name" : "idapps-angular-material-datetime-picker",
-    "version" : "1.2.3",
+    "version" : "1.2.2",
     "authors" : [
         "Yann Lojewski <yann.lojewski@id-apps.fr>"
     ],
@@ -16,7 +16,7 @@
     "dependencies" : {
         "angular" : ">=1.4.8",
         "angular-material" : "^1.1.1",
-        "material-design-icons-font" : "git@github.com:y4nnL/material-design-icons-font.git#1.0",
+        "material-design-icons-font" : "git@gitlab.id-apps.info:interne-idapps-angular/material-design-icons-font.git#1.0",
         "angular-i18n" : "^1.5.8",
         "lodash" : "^4.16.4"
     },
