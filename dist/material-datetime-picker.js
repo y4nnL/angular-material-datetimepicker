@@ -46,7 +46,10 @@
      *     minDate             : Date
      *     next                : string
      *     now                 : string
+     *     delete              : string
+     *     deleteButton        : boolean
      *     nowButton           : boolean
+     *     nowOnlyOnDate       : boolean
      *     openFrom            : Element|string
      *     parent              : Element|string
      *     previous            : string
@@ -58,6 +61,8 @@
      *     timeStep            : number
      *     timeTitle           : string
      *     toolbar             : boolean
+     *     timeStepDefaultTime : boolean
+     *     allowInvalidTime    : boolean
      * }}
      */
     var Options;
@@ -105,10 +110,11 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Templates : time
 
+	
     templates.time =
         '<div layout="row"' +
         '     layout-align="center none">' +
-        '    <div class="md-datetime-picker-time-container" layout>' +
+        '    <div class="md-datetime-picker-time-container" ng-class="dateTimePicker.isDateInvalid() ? \'invalid\' : \'\'" layout>' +
         '        <div class="md-datetime-picker-time-box">' +
         '            <md-button class="md-datetime-picker-time-up md-icon-button md-primary"' +
         '                       ng-click="dateTimePicker.hoursUp()">' +
@@ -217,8 +223,14 @@
         '        <span class="md-datetime-picker-button-sep"' +
         '              flex="none"></span>' +
         '        <md-button class="{{dateTimePicker.buttonClass || \'md-primary\'}}"' +
+        '                   ng-click="dateTimePicker.delete()"' +
+        '                   ng-if="dateTimePicker.deleteButton"' +
+        '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.delete}}</md-button>' +
+        '        <span class="md-datetime-picker-button-sep"' +
+        '              flex="none" ng-if="dateTimePicker.deleteButton"></span>' +
+        '        <md-button class="{{dateTimePicker.buttonClass || \'md-primary\'}}"' +
         '                   ng-click="dateTimePicker.hide()"' +
-        '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
+        '                   ng-disabled="dateTimePicker.isDateInvalid() || !dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
         '    </md-dialog-actions>' +
         '</md-dialog>';
 
@@ -373,6 +385,7 @@
             hide          : resolvedOptions.hide || 'Validate',
             next          : resolvedOptions.next || 'Next',
             now           : resolvedOptions.now || 'Now',
+            delete        : resolvedOptions.delete || 'Delete',
             previous      : resolvedOptions.previous || 'Previous',
             title         : resolvedOptions.title,
             timeSeparator : resolvedOptions.timeSeparator || ':',
@@ -409,8 +422,39 @@
          */
         dateTimePicker.toolbar = !!resolvedOptions.toolbar;
 
+        /**
+         * Whether show the delete button
+         * @type {boolean}
+         */
+        dateTimePicker.deleteButton = resolvedOptions.deleteButton || false;
+		
+		/**
+		 * Whether the now button reset only the date field
+		 * @type {boolean}
+		 */
+		dateTimePicker.nowOnlyOnDate = resolvedOptions.nowOnlyOnDate || false;
+		
+		/**
+		 * Whether the time will be set to 00:<timestep>
+		 * @type {boolean}
+		 */
+		dateTimePicker.timeStepDefaultTime = resolvedOptions.timeStepDefaultTime || false;
+		
+		
+		/**
+		 * Allow the time to be set to 00:00
+		 * @type {boolean}
+		 */
+		dateTimePicker.allowInvalidTime = resolvedOptions.allowInvalidTime || false;
+		
+        
         ////////// API : methods
 
+		dateTimePicker.isDateInvalid = function ()
+		{
+			return !dateTimePicker.allowInvalidTime && dateTimePicker.date.getHours() === 0 && dateTimePicker.date.getMinutes() === 0;
+		}
+		
         /**
          * Cancel the dialog
          */
@@ -509,11 +553,24 @@
          * Set the date to now
          */
         dateTimePicker.now = function () {
-            dateTimePicker.date    = new Date();
-            dateTimePicker.hours   = dateTimePicker.date.getHours();
-            dateTimePicker.minutes = dateTimePicker.date.getMinutes();
+            dateTimePicker.date = new Date();
+			
+			// We set the time to the current time only if nowOnlyOnDate is false
+			if (!dateTimePicker.nowOnlyOnDate)
+			{
+				dateTimePicker.hours   = dateTimePicker.date.getHours();
+				dateTimePicker.minutes = dateTimePicker.date.getMinutes();
+			}
+			
         };
 
+        /**
+         * Send a delete action
+         */
+        dateTimePicker.delete = function () {
+            $mdDialog.hide({ delete: true });
+        };
+        
         /**
          * Decrement a day
          */
@@ -526,12 +583,23 @@
         if (dateTimePicker.date === null) {
             if (resolvedOptions.template === 'datetime') {
                 dateTimePicker.date = new Date();
-                dateTimePicker.date.setHours(
-                    dateTimePicker.hours = dateTimePicker.date.getHours(),
-                    dateTimePicker.minutes = dateTimePicker.date.getMinutes(),
-                    0,
-                    0
-                );
+				
+				if (dateTimePicker.timeStepDefaultTime) {
+					dateTimePicker.date.setHours(
+						dateTimePicker.hours = 0,
+						dateTimePicker.minutes = resolvedOptions.timeStep,
+						0,
+						0
+					);
+				} else {
+					dateTimePicker.date.setHours(
+						dateTimePicker.hours = dateTimePicker.date.getHours(),
+						dateTimePicker.minutes = dateTimePicker.date.getMinutes(),
+						0,
+						0
+					);
+				}
+
             } else if (resolvedOptions.template == 'time') {
                 dateTimePicker.date = new Date();
                 dateTimePicker.date.setHours(

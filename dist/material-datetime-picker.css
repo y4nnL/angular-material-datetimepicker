@@ -1,6 +1,12 @@
 /***********************************************************************************************************************
  ** Component : md-datetime-picker */
 
+ .gmao-ui-dialog .md-datetime-picker-time-container.invalid,
+ .gmao-ui-dialog .md-datetime-picker-time-container.invalid * {
+	color: red !important;
+	border-color: red !important;
+}
+
 .md-datetime-picker-time-box {
     position   : relative;
     font-size  : 48px;
