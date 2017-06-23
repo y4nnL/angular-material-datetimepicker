@@ -28,56 +28,74 @@ function MaterialDateTimePicker($scope, $mdDateTimePicker) {
 
     ////////// API : methods
 
+    $scope.pickDateModel = null;
+    $scope.pickDateOptions = {
+        date        : $scope.date,
+        maxDate     : moment().add('5', 'days').toDate(),
+        minDate     : moment().subtract('5', 'days').toDate(),
+        targetEvent : null,
+        title       : 'Yoooooo!',
+        class       : 'full-width',
+        //toolbar     : true
+    };
+
     $scope.pickDate = function ($event) {
-        $mdDateTimePicker({
-            date        : $scope.date,
-            maxDate     : moment().add('5', 'days').toDate(),
-            minDate     : moment().subtract('5', 'days').toDate(),
-            targetEvent : $event,
-            title       : 'Yoooooo!',
-            class       : 'full-width',
-            //toolbar     : true
-        }).then(function (date) {
-            $scope.date = date;
-        });
+        $scope.pickDateOptions.targetEvent = $event;
+        $mdDateTimePicker($scope.pickDateOptions)
+            .then(function (date) {
+                $scope.date = date;
+            });
+    };
+
+    $scope.isPickTimeModelValid = null;
+    $scope.pickTimeModel = null;
+    $scope.pickTimeOptions = {
+        buttonAlign   : 'center',
+        buttonClass   : 'yoooo',
+        date          : $scope.date,
+        targetEvent   : null,
+        template      : 'time',
+        timeStep      : 15,
+        timeSeparator : 'h',
+        title         : 'Yoooooo!',
+        class         : 'full-width',
+        //toolbar     : true
     };
 
     $scope.pickTime = function ($event) {
-        $mdDateTimePicker({
-            buttonAlign   : 'center',
-            buttonClass   : 'yoooo',
-            date          : $scope.date,
-            targetEvent   : $event,
-            template      : 'time',
-            timeStep      : 15,
-            timeSeparator : 'h',
-            title         : 'Yoooooo!',
-            class         : 'full-width',
-            //toolbar     : true
-        }).then(function (date) {
-            $scope.date = date;
-        });
+        $scope.pickTimeOptions.targetEvent = $event;
+        $mdDateTimePicker($scope.pickTimeOptions.targetEvent)
+            .then(function (date) {
+                $scope.date = date;
+            });
+    };
+
+    $scope.isPickDateTimeModelValid = null;
+    $scope.pickDateTimeModel = null;
+    $scope.pickDateTimeOptions = {
+        cancel        : 'kènesôl',
+        date          : $scope.date,
+        hide          : 'Validèïte',
+        maxDate       : moment().add('5', 'days').toDate(),
+        minDate       : moment().subtract('5', 'days').toDate(),
+        next          : 'Naixte',
+        nowStartOfDay : true,
+        previous      : 'Préviousse',
+        tabs          : false,
+        targetEvent   : null,
+        template      : 'datetime',
+        timeStep      : 15,
+        timeSeparator : 'h',
+        title         : 'Yoooooo!',
+        class         : 'full-width',
+        toolbar       : true
     };
 
     $scope.pickDateTime = function ($event) {
-        $mdDateTimePicker({
-            cancel        : 'kènesôl',
-            date          : $scope.date,
-            hide          : 'Validèïte',
-            maxDate       : moment().add('5', 'days').toDate(),
-            minDate       : moment().subtract('5', 'days').toDate(),
-            next          : 'Naixte',
-            previous      : 'Préviousse',
-            tabs          : false,
-            targetEvent   : $event,
-            template      : 'datetime',
-            timeStep      : 15,
-            timeSeparator : 'h',
-            title         : 'Yoooooo!',
-            class         : 'full-width',
-            toolbar       : true
-        }).then(function (date) {
-            $scope.date = date;
-        });
+        $scope.pickDateTimeOptions.targetEvent = $event;
+        $mdDateTimePicker($scope.pickDateTimeOptions.targetEvent)
+            .then(function (date) {
+                $scope.date = date;
+            });
     };
 }

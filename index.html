@@ -25,6 +25,26 @@
             <div>date={{date|date:'EEEE dd MMMM yyyy'}}</div>
             <div>time={{date|date:'HH:mm'}}</div>
         </div>
+        <hr>
+        <md-datetimepicker options="pickDateOptions"
+                           template="date"
+                           date="pickDateModel"></md-datetimepicker>
+        date={{pickDateModel|date:'EEEE dd MMMM yyyy'}}
+        <hr>
+        <md-datetimepicker options="pickTimeOptions"
+                           template="time"
+                           date="pickTimeModel"
+                           is-valid="isPickTimeModelValid"></md-datetimepicker>
+        time={{pickTimeModel|date:'HH:mm'}}
+        isValid={{isPickTimeModelValid|json}}
+        <hr>
+        <md-datetimepicker options="pickDateTimeOptions"
+                           template="datetime"
+                           date="pickDateTimeModel"
+                           is-valid="isPickDateTimeModelValid"></md-datetimepicker>
+        date={{pickDateTimeModel|date:'EEEE dd MMMM yyyy'}}
+        time={{pickDateTimeModel|date:'HH:mm'}}
+        isValid={{isPickDateTimeModelValid|json}}
         <!--
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Vendors JS
