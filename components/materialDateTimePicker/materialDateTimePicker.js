@@ -47,6 +47,28 @@ function MaterialDateTimePicker($scope, $mdDateTimePicker) {
             });
     };
 
+    $scope.pickDateTimeFilterModel = null;
+    $scope.pickDateTimeFilterOptions = {
+        date        : $scope.date,
+        maxDate     : moment().add('5', 'days').toDate(),
+        minDate     : moment().subtract('5', 'days').toDate(),
+        targetEvent : null,
+        timeFilter  : function (date) {
+            return date.getHours() === 0 && date.getMinutes() === 10;
+        },
+        title       : 'Yoooooo!',
+        class       : 'full-width',
+        //toolbar     : true
+    };
+
+    $scope.pickDateTimeFilter = function ($event) {
+        $scope.pickDateTimeFilterOptions.targetEvent = $event;
+        $mdDateTimePicker($scope.pickDateTimeFilterOptions)
+            .then(function (date) {
+                $scope.date = date;
+            });
+    };
+
     $scope.isPickTimeModelValid = null;
     $scope.pickTimeModel = null;
     $scope.pickTimeOptions = {

@@ -58,6 +58,7 @@
      *     targetEvent         : Event
      *     template            : string
      *     title               : string
+     *     timeFilter          : function(Date):boolean
      *     timeSeparator       : string
      *     timeStep            : number
      *     timeTitle           : string
@@ -218,7 +219,9 @@
         '                   ng-click="dateTimePicker.cancel()">{{dateTimePicker.i18n.cancel}}</md-button>' +
         '        <md-button class="{{dateTimePicker.buttonClass || \'md-primary\'}}"' +
         '                   ng-click="dateTimePicker.hide()"' +
-        '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
+        '                   ng-disabled="!(dateTimePicker.date && dateTimePicker.isDateValid())">' +
+        '            {{dateTimePicker.i18n.hide}}' +
+        '        </md-button>' +
         '    </md-dialog-actions>' +
         '    <md-dialog-actions layout="row"' +
         '                       layout-align="center"' +
@@ -229,7 +232,9 @@
         '              flex="none"></span>' +
         '        <md-button class="{{dateTimePicker.buttonClass || \'md-primary\'}}"' +
         '                   ng-click="dateTimePicker.hide()"' +
-        '                   ng-disabled="!dateTimePicker.date">{{dateTimePicker.i18n.hide}}</md-button>' +
+        '                   ng-disabled="!(dateTimePicker.date && dateTimePicker.isDateValid())">' +
+        '            {{dateTimePicker.i18n.hide}}' +
+        '        </md-button>' +
         '    </md-dialog-actions>' +
         '</md-dialog>';
 
@@ -559,16 +564,19 @@
          * @returns {boolean}
          */
         dateTimePicker.isDateValid = function () {
-            var isValid = false;
+            var isValid     = false;
             var isValidAttr = $element.attr('is-valid');
             if (angular.isDate(dateTimePicker.date)) {
                 if (!dateTimePicker.allowStartOfDay) {
-                    isValid = dateTimePicker.date.getHours() === 0 ?dateTimePicker.date.getMinutes() !== 0 : true;
+                    isValid = dateTimePicker.date.getHours() === 0 ? dateTimePicker.date.getMinutes() !== 0 : true;
                 } else {
                     isValid = true;
                 }
             } else {
                 isValid = false;
+            }
+            if (isValid === true && dateTimePicker.options.timeFilter) {
+                isValid = dateTimePicker.options.timeFilter(dateTimePicker.date) === false;
             }
             if (isValidAttr) {
                 $scope.$parent.$eval($element.attr('is-valid') + ' = ' + isValid);
@@ -862,12 +870,15 @@
             var isValid = false;
             if (angular.isDate(dateTimePicker.date)) {
                 if (!dateTimePicker.allowStartOfDay) {
-                    isValid = dateTimePicker.date.getHours() === 0 ?dateTimePicker.date.getMinutes() !== 0 : true;
+                    isValid = dateTimePicker.date.getHours() === 0 ? dateTimePicker.date.getMinutes() !== 0 : true;
                 } else {
                     isValid = true;
                 }
             } else {
                 isValid = false;
+            }
+            if (isValid === true && resolvedOptions.timeFilter) {
+                isValid = resolvedOptions.timeFilter(dateTimePicker.date) === false;
             }
             return isValid;
         };
